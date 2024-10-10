@@ -11,3 +11,7 @@ This command will print the generated PlantUML structure to stdout
 ```
 t2d trace.json
 ``` 
+
+### Example trace file
+
+A example trace file can be found [here](https://raw.githubusercontent.com/jaegertracing/jaeger/refs/heads/main/plugin/storage/integration/fixtures/traces/example_trace.json)

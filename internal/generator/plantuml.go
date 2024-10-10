@@ -18,6 +18,8 @@ func (p PlantUML) Generate(trace internal.Trace) error {
 	spans := trace.Spans
 	sb := strings.Builder{}
 
+	bannedCharacterReplacer := strings.NewReplacer("-", "")
+
 	sb.WriteString("@startuml\n")
 	sb.WriteString(fmt.Sprintf("title %s\n", spans[0].TraceID))
 	slices.SortFunc(spans, func(a internal.Span, b internal.Span) int {
@@ -28,7 +30,7 @@ func (p PlantUML) Generate(trace internal.Trace) error {
 			continue
 		}
 		nextSpan := spans[i+1]
-		sb.WriteString(fmt.Sprintf("%s->%s: %s\n", strings.ReplaceAll(s.Process.ServiceName, "-", ""), strings.ReplaceAll(nextSpan.Process.ServiceName, "-", ""), nextSpan.OperationName))
+		sb.WriteString(fmt.Sprintf("%s->%s: %s\n", bannedCharacterReplacer.Replace(s.Process.ServiceName), bannedCharacterReplacer.Replace(nextSpan.Process.ServiceName), nextSpan.OperationName))
 	}
 	sb.WriteString("@enduml")
 	fmt.Print(sb.String())
