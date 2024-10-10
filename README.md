@@ -8,4 +8,6 @@ Current diagram implemenations
 # Usage
 
 This command will print the generated PlantUML structure to stdout
-`t2d trace.json` 
+```
+t2d trace.json
+``` 
